@@ -1,5 +1,6 @@
 import * as fp from 'fastify-plugin'
-import { bookings } from './routes'
+import { booking, bookings } from './routes'
+import { bookingBodySchema } from './routes/booking/booking.schemas'
 
 export default fp(async (server, opts, next) => {
     server.route({
@@ -21,8 +22,8 @@ export default fp(async (server, opts, next) => {
         url: '/booking',
         logLevel: 'warn',
         method: 'POST',
-        schema: {},
-        handler: async (request, reply) => reply.send('Not implemented')
+        schema: bookingBodySchema,
+        handler: booking(server)
     })
 
     server.route({
