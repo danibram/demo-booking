@@ -1,4 +1,5 @@
 import * as fp from 'fastify-plugin'
+import { bookings } from './routes'
 
 export default fp(async (server, opts, next) => {
     server.route({
@@ -10,10 +11,10 @@ export default fp(async (server, opts, next) => {
     })
 
     server.route({
-        url: '/info',
+        url: '/bookings',
         logLevel: 'warn',
         method: ['GET'],
-        handler: async (request, reply) => {}
+        handler: bookings(server)
     })
 
     server.route({
@@ -21,7 +22,7 @@ export default fp(async (server, opts, next) => {
         logLevel: 'warn',
         method: 'POST',
         schema: {},
-        handler: async (request, reply) => {}
+        handler: async (request, reply) => reply.send('Not implemented')
     })
 
     server.route({
@@ -29,7 +30,7 @@ export default fp(async (server, opts, next) => {
         logLevel: 'warn',
         method: 'POST',
         schema: {},
-        handler: async (request, reply) => {}
+        handler: async (request, reply) => reply.send('Not implemented')
     })
 
     server.route({
@@ -37,7 +38,7 @@ export default fp(async (server, opts, next) => {
         logLevel: 'warn',
         method: 'POST',
         schema: {},
-        handler: async (request, reply) => {}
+        handler: async (request, reply) => reply.send('Not implemented')
     })
 
     server.route({
@@ -45,7 +46,7 @@ export default fp(async (server, opts, next) => {
         logLevel: 'warn',
         method: 'POST',
         schema: {},
-        handler: async (request, reply) => {}
+        handler: async (request, reply) => reply.send('Not implemented')
     })
 
     next()

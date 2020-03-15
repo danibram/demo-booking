@@ -3,6 +3,7 @@ import * as fastify from 'fastify'
 import fastifyBlipp from 'fastify-blipp-log'
 import * as http from 'http'
 import { IncomingMessage, Server, ServerResponse } from 'http'
+import routes from './router'
 import { database, DB } from './utils/db'
 import { IBooking } from './utils/types'
 
@@ -28,6 +29,8 @@ const server: fastify.FastifyInstance<
 
 server.register(fastifyBlipp)
 server.register(database)
+
+server.register(routes)
 
 export const start = (server => async () => {
     try {
