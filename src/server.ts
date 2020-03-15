@@ -3,6 +3,7 @@ import * as fastify from 'fastify'
 import fastifyBlipp from 'fastify-blipp-log'
 import * as http from 'http'
 import { IncomingMessage, Server, ServerResponse } from 'http'
+import { IS_TESTING_ENV, PORT } from './envs'
 import routes from './router'
 import { database, DB } from './utils/db'
 import { IBooking } from './utils/types'
@@ -22,9 +23,11 @@ const server: fastify.FastifyInstance<
     IncomingMessage,
     ServerResponse
 > = fastify({
-    logger: {
-        prettyPrint: { colorize: true }
-    }
+    logger: IS_TESTING_ENV
+        ? undefined
+        : {
+              prettyPrint: { colorize: true }
+          }
 })
 
 server.register(fastifyBlipp)
@@ -34,7 +37,7 @@ server.register(routes)
 
 export const start = (server => async () => {
     try {
-        await server.listen(3001, '0.0.0.0')
+        await server.listen(Number(PORT), '0.0.0.0')
         server.prettyPrintRoutes()
     } catch (err) {
         server.log.error(err)
