@@ -1,4 +1,4 @@
-export const bookingBodySchema = {
+export const bookingSchema = {
     body: {
         type: 'object',
         required: ['room'],
