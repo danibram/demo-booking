@@ -1,7 +1,8 @@
 import * as fp from 'fastify-plugin'
-import { booking, bookings, checkIn } from './routes'
+import { booking, bookings, checkIn, openDoor } from './routes'
 import { bookingSchema } from './routes/booking/booking.schema'
 import { checkInSchema } from './routes/checkIn/checkIn.schema'
+import { openDoorSchema } from './routes/openDoor/openDoor.schema'
 
 export default fp(async (server, opts, next) => {
     server.route({
@@ -36,11 +37,11 @@ export default fp(async (server, opts, next) => {
     })
 
     server.route({
-        url: '/door-open/:id',
+        url: '/open-door/:id',
         logLevel: 'warn',
         method: 'POST',
-        schema: {},
-        handler: async (request, reply) => reply.send('Not implemented')
+        schema: openDoorSchema,
+        handler: openDoor(server)
     })
 
     server.route({
