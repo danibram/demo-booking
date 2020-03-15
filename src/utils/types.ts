@@ -8,21 +8,18 @@ export type IGuestBooking = {
 export type ILogBooking = { ts: Date; desc: string }
 
 export type IBooking = {
-    id?: string
     room: string
     code: string
     status: IStatusBooking
-    guest: {} | IGuestBooking
+    guest: IGuestBooking
     log: ILogBooking[]
-    createdAt: Date
-    updatedAt: Date
 }
 
 export type IUpdateBooking = {
     room?: string
     code?: string
     status?: IStatusBooking
-    guest?: {} | IGuestBooking
+    guest?: IGuestBooking
     log?: ILogBooking[]
     createdAt?: Date
     updatedAt?: Date
