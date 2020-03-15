@@ -71,3 +71,4 @@ export const bookingManager = {
 }
 
 export const isInBooking = booking => booking.status === 'booking'
+export const isInCheckIn = booking => booking.status === 'checkin'
