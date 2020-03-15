@@ -1,6 +1,7 @@
 import * as fp from 'fastify-plugin'
-import { booking, bookings } from './routes'
-import { bookingBodySchema } from './routes/booking/booking.schemas'
+import { booking, bookings, checkIn } from './routes'
+import { bookingSchema } from './routes/booking/booking.schema'
+import { checkInSchema } from './routes/checkIn/checkIn.schema'
 
 export default fp(async (server, opts, next) => {
     server.route({
@@ -22,7 +23,7 @@ export default fp(async (server, opts, next) => {
         url: '/booking',
         logLevel: 'warn',
         method: 'POST',
-        schema: bookingBodySchema,
+        schema: bookingSchema,
         handler: booking(server)
     })
 
@@ -30,8 +31,8 @@ export default fp(async (server, opts, next) => {
         url: '/check-in/:id',
         logLevel: 'warn',
         method: 'POST',
-        schema: {},
-        handler: async (request, reply) => reply.send('Not implemented')
+        schema: checkInSchema,
+        handler: checkIn(server)
     })
 
     server.route({
