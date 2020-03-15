@@ -1,5 +1,5 @@
 import test from 'ava'
-import server from '../server'
+import server from '../../server'
 
 test.beforeEach(async t => {
     await server.ready()

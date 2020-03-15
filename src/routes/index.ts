@@ -1,1 +1,1 @@
-export * from './bookings'
+export * from './bookings/bookings'
