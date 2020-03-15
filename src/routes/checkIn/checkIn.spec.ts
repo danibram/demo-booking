@@ -14,8 +14,6 @@ test('check in', async t => {
 
     const newBooking = JSON.parse(response.payload)
 
-    console.log(newBooking)
-
     response = await server.inject({
         method: 'POST',
         url: `/check-in/${newBooking.id}`,
