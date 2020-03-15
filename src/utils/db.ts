@@ -1,11 +1,17 @@
 import * as fp from 'fastify-plugin'
 import { v1 as uuid } from 'uuid'
+import { timeout } from './helpers'
 import { IBooking } from './types'
 
 export class DB<T> {
     collection: {
         [key: string]: T
     } = {}
+
+    connect = async () => {
+        await timeout(1000)
+        return 'ok'
+    }
 
     create(input) {
         const id = uuid()
@@ -67,6 +73,10 @@ export class DB<T> {
 }
 
 export const database = fp(async (fastify, opts: { uri: string }, next) => {
+    const db = new DB<IBooking>()
+
+    await db.connect()
+    fastify.log.info('Database `connected` =)')
     fastify.decorate('db', new DB<IBooking>())
     next()
 })
