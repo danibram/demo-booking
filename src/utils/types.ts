@@ -14,13 +14,3 @@ export type IBooking = {
     guest: IGuestBooking
     log: ILogBooking[]
 }
-
-export type IUpdateBooking = {
-    room?: string
-    code?: string
-    status?: IStatusBooking
-    guest?: IGuestBooking
-    log?: ILogBooking[]
-    createdAt?: Date
-    updatedAt?: Date
-}
