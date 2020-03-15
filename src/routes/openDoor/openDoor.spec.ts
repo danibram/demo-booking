@@ -22,7 +22,7 @@ test('door open', async t => {
 
     response = await server.inject({
         method: 'POST',
-        url: `/door-open/${id}`
+        url: `/open-door/${id}`
     })
 
     t.is(response.statusCode, 200)
