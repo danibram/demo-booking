@@ -4,16 +4,23 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "dev": "ts-node  --files ./src"
+        "watch": "npm run build && npx multiview [yarn watch:build] [yarn watch:unit]",
+        "watch:build": "tsc -p tsconfig.json -w",
+        "watch:unit": "tsc -p tsconfig.json && ava --watch --verbose",
+        "dev": "ts-node  --files ./src",
+        "test": "npm run build && NODE_ENV=test ava",
+        "build": "rm -rf dist && tsc --sourceMap -p ./",
+        "start": "node ./dist/index.js"
     },
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "ava": "^3.5.0",
         "fastify": "^2.12.1",
         "fastify-blipp-log": "^1.0.2",
         "fastify-plugin": "^1.6.1",
-        "pino-pretty": "^3.6.1"
+        "pino-pretty": "^3.6.1",
+        "uuid": "^7.0.2"
     },
     "devDependencies": {
         "@types/node": "^13.9.1",
@@ -27,5 +34,10 @@
         "prettier": "^1.19.1",
         "ts-node": "^8.6.2",
         "typescript": "^3.8.3"
+    },
+    "ava": {
+        "files": [
+            "dist/**/*.spec.js"
+        ]
     }
 }
